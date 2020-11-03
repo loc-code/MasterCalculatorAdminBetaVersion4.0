@@ -1,0 +1,159 @@
+from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk
+import sys
+
+#Set Up Screen
+root = Tk()
+root.title("Super Calculator V3.0 (Admin Beta Version)")
+#root.attributes("-fullscree", True)
+root.geometry("1350x680")
+root.configure(bg = "Cadet Blue")
+photo = PhotoImage(file = "Icon.png")
+#root.iconphoto(False, photo)
+
+#Set Variable
+SideSquare = StringVar()
+WidthRec = StringVar()
+HeightRec = StringVar()
+
+#Ans Variable
+PerAnsSquare = StringVar()
+AreaAnsSquare = StringVar()
+PerAnsRec = StringVar()
+AreaAnsRec = StringVar()
+
+#Set Up Function
+#Exit Function
+def Exit():
+	root.destroy()
+	sys.exit()
+
+#Program Function
+def About_Updates():
+	messagebox.showinfo(message = "This is version 4.0, Updates UserInterface, Fix Bug, Make it Faster,...")
+
+def Check_Updates():
+	messagebox.showinfo(message = "You is Using Version 4.0, This is The Lastest Version!")
+
+def show_function():
+	def NOPE():
+		messagebox.showinfo(message = "404! Not Found")
+
+	show_Fx = Toplevel(root)
+	show_Fx.geometry("615x600")
+	show_Fx.title("Show Function")
+	show_Fx.configure(bg = "Cadet Blue")
+	show_Fx.resizable(0,0)
+
+	ButtonRec = Button(show_Fx, text = "Rectangle Function", font = ("Arial 16 bold"), width = 15, command = NOPE)
+	ButtonRec.grid(row = 0, column = 0)
+	ButtonSquare = Button(show_Fx, text = "Square Function", font = ("Arial 16 bold"), width = 15, command = NOPE)
+	ButtonSquare.grid(row = 0, column = 1)
+	ButtonCircle = Button(show_Fx, text = "Circle Function", font = ("Arial 16 bold"), width = 15, command = NOPE)
+	ButtonCircle.grid(row = 0, column = 2)
+	
+
+def Clear_All():
+	SideSquare.set("")
+	WidthRec.set("")
+	HeightRec.set("")
+	PerAnsSquare.set("")
+	AreaAnsSquare.set("")
+	PerAnsRec.set("")
+	AreaAnsRec.set("")
+
+def Cal_Square():
+	CalSideSquare = int(SideSquare.get())
+	PerSquare = CalSideSquare * 4
+	AreaSquare = CalSideSquare * CalSideSquare
+	PerAnsSquare.set(PerSquare)
+	AreaAnsSquare.set(AreaSquare)
+
+def Cal_Rectangle():
+	CalWidthRec = int(WidthRec.get())
+	CalHeightRec = int(HeightRec.get())
+	PerRec = (CalWidthRec + CalHeightRec) * 2
+	AreaRec = CalWidthRec * CalHeightRec
+	PerAnsRec.set(PerRec)
+	AreaAnsRec.set(AreaRec)
+
+def Square_F():
+	Square_F = Toplevel(root)
+	Square_F.title("Calculate The Square")
+	Square_F.geometry("600x600")
+
+	#Clear First Function
+	Clear_All()
+
+	#Labels & Buttons
+	Square_lbl = Label(Square_F, text = "Please Input The Side Of The Square", font = ("Arial 12 bold"))
+	Square_lbl.pack(side = TOP, anchor = W)
+	Square_Entry = Entry(Square_F, font = ("Arial 16 bold"), textvariable = SideSquare)
+	Square_Entry.pack(side = TOP, anchor = W)
+	ClearBtn = Button(Square_F, text = "Clear All", font = ("Arial 16 bold"), activebackground = "Lime", command = Clear_All)
+	ClearBtn.pack(side = TOP)
+	CalculateBtn = Button(Square_F, text = "Calculate", font = ("Arial 16 bold"), activebackground = "Lime", command = Cal_Square)
+	CalculateBtn.pack(side = TOP, pady = 10)
+	
+	#Perimeter
+	PerSquareAnslbl = Label(Square_F, text = "Perimeter:", font = ("Arial 16 bold"))
+	PerSquareAnslbl.pack(side = TOP)
+	PerSquareAnsEntry = Entry(Square_F, font = ("Arial 16 bold"), textvariable = PerAnsSquare)
+	PerSquareAnsEntry.pack(side = TOP)
+
+	#Area
+	AreaSquareAnslbl = Label(Square_F, text = "Area:", font = ("Arial 16 bold"))
+	AreaSquareAnslbl.pack(side = TOP)
+	AreaSquareAnsEntry = Entry(Square_F, font = ("Arial 16 bold"), textvariable = AreaAnsSquare)
+	AreaSquareAnsEntry.pack(side = TOP)
+
+def Rectangle_F():
+	Rectangle_F = Toplevel(root)
+	Rectangle_F.title("Calculate The Rectangle")
+	Rectangle_F.geometry("600x580")
+
+	#Label & Buttons
+	Rectangle_Width_lbl = Label(Rectangle_F, text = "Please Input The Width Of The Rectangle:", font = ("Arial 16 bold"))
+	Rectangle_Width_lbl.pack(side = TOP, anchor = W)
+	Rectangle_Width_Entry = Entry(Rectangle_F, font = ("Arial 16 bold"), textvariable = WidthRec)
+	Rectangle_Width_Entry.pack(side = TOP, anchor = W)
+	Rectangle_Height_lbl = Label(Rectangle_F, text = "Please Input The Height Of The Rectangle:", font = ("Arial 16 bold"))
+	Rectangle_Height_lbl.pack(side = TOP, anchor = W)
+	Rectangle_Height_Entry = Entry(Rectangle_F, font = ("Arial 16 bold"), textvariable = HeightRec)
+	Rectangle_Height_Entry.pack(side = TOP, anchor = W)
+	ClearBtn = Button(Rectangle_F, text = "Clear All", font = ("Arial 16 bold"), activebackground = "Lime", command = Clear_All)
+	ClearBtn.pack(side = TOP)
+	CalculateBtn = Button(Rectangle_F, text = "Calculate", font = ("Arial 16 bold"), activebackground = "Lime", command = Cal_Rectangle)
+	CalculateBtn.pack(side = TOP, pady = 10)
+
+	#Perimeter
+	PerSquareAnslbl = Label(Rectangle_F, text = "Perimeter:", font = ("Arial 16 bold"))
+	PerSquareAnslbl.pack(side = TOP)
+	PerSquareAnsEntry = Entry(Rectangle_F, font = ("Arial 16 bold"), textvariable = PerAnsRec)
+	PerSquareAnsEntry.pack(side = TOP)
+
+	#Area
+	AreaSquareAnslbl = Label(Rectangle_F, text = "Area:", font = ("Arial 16 bold"))
+	AreaSquareAnslbl.pack(side = TOP)
+	AreaSquareAnsEntry = Entry(Rectangle_F, font = ("Arial 16 bold"), textvariable = AreaAnsRec)
+	AreaSquareAnsEntry.pack(side = TOP)
+
+#MenuBar
+menuBar = Menu(root)
+file = Menu(menuBar, tearoff = 0)
+file.add_command(label = "Exit MasterCalculator", command = Exit)
+menuBar.add_cascade(label = "File", menu = file)
+helper = Menu(menuBar, tearoff = 0)
+helper.add_command(label = "About This Updates", command = About_Updates)
+helper.add_command(label = "Check For Updates", command = Check_Updates)
+menuBar.add_cascade(label = "Help", menu = helper)
+
+#Main Function
+tinhHinhVuongBtn = Button(root, text = "Calculate Square", font = ("Arial 16 bold"), width = 25, height = 3, activebackground = "Lime", command = Square_F).grid(row = 1, column = 0)
+tinhHinhChuNhatBtn = Button(root, text = "Calculate Rectangle", font = ("Arial 16 bold"), width = 25, height = 3, activebackground = "Lime", command = Rectangle_F).grid(row = 1, column = 1)
+ShowFunctionbtn = Button(root, text = "Show Shape Calculate Function", font = ("Arial 16 bold"), width = 25, height = 3, activebackground = "Lime", command = show_function).grid(row = 2, column = 0)
+
+#Mainloop
+root.config(menu = menuBar)
+root.mainloop()
